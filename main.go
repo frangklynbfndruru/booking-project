@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	_ "fmt"
 	"github.com/frangklynbfndruru/booking-project/app"
 )
 
