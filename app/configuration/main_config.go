@@ -1,11 +1,13 @@
-package controllers
+package configuration
 
 import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/urfave/cli"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -56,6 +58,15 @@ func (server *Server) initializeDB(dbConfig DbConfig) {
 	}
 }
 
-func initCommands() {
+func (server *Server) dbMigrate()  {
+	
+}
 
+func (server *Server) InitCommands(config AppConfig, dbConfig DbConfig) {
+	server.initializeDB(dbConfig)
+commandApp := cli.NewApp()
+	err := commandApp.Run(os.Args)
+	if err != nil{
+		log.Fatal(err)
+	}
 }

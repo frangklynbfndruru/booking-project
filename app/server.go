@@ -5,14 +5,15 @@ import (
 	"log"
 	"os"
 
-	"github.com/frangklynbfndruru/booking-project/app/controllers"
+	"github.com/frangklynbfndruru/booking-project/app/configuration"
+
 	"github.com/joho/godotenv"
 )
 
 func Run() {
-	var server = controllers.Server{}
-	var appConfig = controllers.AppConfig{}
-	var dbConfig = controllers.DbConfig{}
+	var server = configuration.Server{}
+	var appConfig = configuration.AppConfig{}
+	var dbConfig = configuration.DbConfig{}
 
 	err := godotenv.Load()
 	if err != nil {
@@ -30,13 +31,13 @@ func Run() {
 	dbConfig.DbPort = os.Getenv("DbPort")
 
 	flag.Parse()       //untuk menerima command go run dari terminal
-	arg := flag.Arg(0) //mengambil argumen pertamadari command line. contoh `go run db:migrate`
+	// arg := flag.Arg(0) //mengambil argumen pertamadari command line. contoh `go run db:migrate`
 
-	if arg != "" {
-		server.InitCommands(appConfig, dbConfig)
+	// if arg != "" {
+	// 	server.InitCommands(appConfig, dbConfig)
 
-	} else {
+	// } else {
 		server.Initialize(appConfig, dbConfig)
 		server.RunDefaultPort(":" + appConfig.AppPort)
-	}
+	// }
 }
